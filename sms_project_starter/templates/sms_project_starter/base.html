@@ -1,0 +1,29 @@
+<!-- sms_project/templates/sms_project/base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SMS Project{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Student Management System</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'sms_profile:index' %}">Home</a></li>
+                <li><a href="{% url 'sms_courses:index' %}">Courses</a></li>
+                <li><a href="{% url 'sms_faculty:index' %}">Faculty</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>© 2024 SMS Project</p>
+    </footer>
+</body>
+</html>
