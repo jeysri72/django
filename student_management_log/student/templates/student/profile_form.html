@@ -1,0 +1,26 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block title %}Profile Form{% endblock %}
+
+{% block content %}
+    <h2>{{ profile.pk|default_if_none:"Create" }} Profile</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+
+  
+        <!-- Display errors for this field -->
+        {% if form.fieldname.errors %}
+          <ul class="errorlist">
+            {% for error in form.fieldname.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <button type="submit" class="btn">Save</button>
+        <a href="{% url 'student:profile_list' %}" class="btn">Back to Student List</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block title %}Profile Detail{% endblock %}
+
+{% block content %}
+    <h2>Profile: {{ profile.first_name }} {{ profile.last_name }}</h2>
+
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+    <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+    <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
+    <p><strong>Address:</strong> {{ profile.address }}</p>
+    <p><strong>Enrollment Date:</strong> {{ profile.enrollment_date }}</p>
+    <p><strong>Major:</strong> {{ profile.major }}</p>
+    <p><strong>Status:</strong> {{ profile.get_status_display }}</p>
+
+    <a href="{% url 'student:profile_list' %}" class="btn">Back to Student List</a>
+{% endblock %}
