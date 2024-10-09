@@ -1,0 +1,40 @@
+{% extends 'student/base.html' %}
+
+{% block title %}
+  Profile Form
+{% endblock %}
+
+{% block content %}
+  <h2>{{ profile.pk|default_if_none:'Create' }} Profile</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <!-- Display non-field errors (if any) -->
+    {% if form.non_field_errors %}
+      <ul class="errorlist">
+        {% for error in form.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <!-- Display field errors -->
+    <div>
+      <label for="id_fieldname">Field Name:</label>
+      <input type="text" id="id_fieldname" name="fieldname" value="{{ form.fieldname.value }}" />
+
+      <!-- Display errors for this field -->
+      {% if form.fieldname.errors %}
+        <ul class="errorlist">
+          {% for error in form.fieldname.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <button type="submit" class="btn">Save</button>
+    <a href="{% url 'student:profile_list' %}" class="btn">Cancel</a>
+  </form>
+{% endblock %}

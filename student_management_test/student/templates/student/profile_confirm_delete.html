@@ -1,0 +1,13 @@
+{% extends 'student/base.html' %}
+
+{% block title %}Delete Profile{% endblock %}
+
+{% block content %}
+    <h2>Are you sure you want to delete "{{ profile.first_name }} {{ profile.last_name }}"?</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn danger">Delete</button>
+        <a href="{% url 'student:profile_detail' profile.pk %}" class="btn">Cancel</a>
+    </form>
+{% endblock %}
