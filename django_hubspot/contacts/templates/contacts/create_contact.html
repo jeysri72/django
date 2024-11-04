@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Contact</title>
+</head>
+<body>
+    <h1>Create Contact</h1>
+    <form action="{% url 'contacts:create_contact' %}" method="post">
+        {% csrf_token %}
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br>
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" required><br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" required><br>
+        <label for="phone">Phone:</label>
+        <input type="text" name="phone"><br>
+        <button type="submit">Create Contact</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Contact</title>
+</head>
+<body>
+    <h1>Update Contact</h1>
+    {% if contact_id %}
+        <p>Contact ID: {{ contact_id }}</p>
+        <form action="{% url 'contacts:update_contact' contact_id=contact_id %}" method="post">
+            {% csrf_token %}
+
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ firstname|default_if_none:'' }}" required><br>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ lastname|default_if_none:'' }}" required><br>
+
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" value="{{ phone|default_if_none:'' }}"><br>
+
+            <button type="submit">Update Contact</button>
+        </form>
+    {% else %}
+        <p>Error: Contact ID is missing</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+    "HUBSPOT_ACCESS_TOKEN":"Your_hubspot_access_token",
+    "HUBSPOT_API_KEY": "your_hubspot_api_key_here",
+    "OTHER_SERVICE_API_KEY": "your_other_service_api_key_here",
+    "DATABASE_CREDENTIALS": {
+        "USER": "db_user",
+        "PASSWORD": "db_password",
+        "HOST": "db_host",
+        "NAME": "db_name"
+    }
+}
