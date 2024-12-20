@@ -1,0 +1,34 @@
+{% extends 'recommendation_v2\base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete the following {{ object_name }}?</p>
+    
+    <table class="table">
+      <tr>
+        <th>Details</th>
+        <td>
+          {% if object_name == 'user' %}
+            <strong>Name:</strong> {{ object.name }}
+          {% elif object_name == 'product' %}
+            <strong>Product Name:</strong> {{ object.name }} <br>
+            <strong>Description:</strong> {{ object.description }} <br>
+            <strong>Price:</strong> ${{ object.price }}
+          {% elif object_name == 'purchase' %}
+            <strong>User:</strong> {{ object.user.name }} <br>
+            <strong>Product:</strong> {{ object.product.name }} <br>
+            <strong>Purchase Date:</strong> {{ object.purchase_date }}
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Confirm Deletion</button>
+      {% comment %} <a href="{% url redirect_url %}" class="btn btn-secondary">Cancel</a> {% endcomment %}
+      {% comment %} <a href="{% url redirect_url|default:'recommendation_v2:user_list' %}" class="btn btn-secondary">Cancel</a> {% endcomment %}
+    </form>
+  </div>
+{% endblock %}

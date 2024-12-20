@@ -1,0 +1,34 @@
+<!-- templates/product_list.html -->
+{% extends 'recommendation_v2\base.html' %}
+
+{% block title %}Manage Products{% endblock %}
+
+{% block content %}
+<h1>Manage Products</h1>
+<a href="{% url 'recommendation_v2:product_add' %}" class="btn btn-primary mb-3">Add Product</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>
+                <a href="{% url 'recommendation_v2:product_edit' product.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'recommendation_v2:product_delete' product.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

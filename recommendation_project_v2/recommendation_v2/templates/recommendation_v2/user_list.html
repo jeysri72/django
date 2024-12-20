@@ -1,0 +1,30 @@
+<!-- templates/user_list.html -->
+{% extends 'recommendation_v2\base.html' %}
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+<h1>Manage Users</h1>
+<a href="{% url 'recommendation_v2:user_add' %}" class="btn btn-primary mb-3">Add User</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>
+                <a href="{% url 'recommendation_v2:user_edit' user.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'recommendation_v2:user_delete' user.id %}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{% url 'recommendation_v2:recommendations' user.id %}" class="btn btn-info btn-sm">Recommendations</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

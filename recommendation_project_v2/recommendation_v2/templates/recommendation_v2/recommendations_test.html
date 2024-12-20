@@ -1,0 +1,32 @@
+<!-- templates/recommendations.html -->
+{% extends 'recommendation_v2\base.html' %}
+
+{% block title %}Recommendations{% endblock %}
+
+{% block content %}
+<h1>Product Recommendations</h1>
+<form method="GET" action="{% url 'recommendations' %}">
+    <div class="mb-3">
+        <label for="user" class="form-label">Select User</label>
+        <select id="user" name="user" class="form-control">
+            {% for user in users %}
+            <option value="{{ user.id }}">{{ user.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Get Recommendations</button>
+</form>
+
+{% if recommendations %}
+<h2>Recommended Products</h2>
+<ul class="list-group mt-3">
+    {% for product in recommendations %}
+    <li class="list-group-item">
+        <h5>{{ product.name }}</h5>
+        <p>{{ product.description }}</p>
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

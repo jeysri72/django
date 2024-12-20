@@ -1,0 +1,33 @@
+<!-- templates/purchase_list.html -->
+{% extends 'recommendation_v2\base.html' %}
+
+{% block title %}Manage Purchases{% endblock %}
+
+{% block content %}
+<h1>Manage Purchases</h1>
+<a href="{% url 'recommendation_v2:purchase_add' %}" class="btn btn-primary mb-3">Add Purchase</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Product</th>
+            <th>Purchase Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for purchase in purchases %}
+        <tr>
+            <td>{{ purchase.id }}</td>
+            <td>{{ purchase.user.name }}</td>
+            <td>{{ purchase.product.name }}</td>
+            <td>{{ purchase.purchase_date }}</td>
+            <td>
+                <a href="{% url 'recommendation_v2:purchase_delete' purchase.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

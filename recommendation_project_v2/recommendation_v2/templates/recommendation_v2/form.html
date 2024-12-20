@@ -1,0 +1,16 @@
+<!-- templates/form.html -->
+{% extends 'recommendation_v2\base.html' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block content %}
+<h1>{{ form_title }}</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save</button>
+    {% comment %} <a href="{% url redirect_url %}" class="btn btn-secondary">Cancel</a> {% endcomment %}
+    <a href="{% url redirect_url|default:'recommendation_v2:user_list' %}" class="btn btn-secondary">Cancel</a>
+
+</form>
+{% endblock %}

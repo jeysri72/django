@@ -1,0 +1,18 @@
+<!-- recommendations.html -->
+
+{% extends 'recommendation_v2\base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Product Recommendations for {{ user.name }}</h2>
+
+    <h3>Recommended Products</h3>
+    <ul>
+      {% for product in recommendations %}
+        <li>{{ product.name }} - ${{ product.price }}</li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'recommendation_v2:user_list' %}" class="btn btn-secondary">Back to User List</a>
+  </div>
+{% endblock %}
