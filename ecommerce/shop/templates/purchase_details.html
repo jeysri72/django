@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Purchase Details</h1>
+<h2>Purchase Information</h2>
+<p><strong>Purchase Date:</strong> {{ purchase_header.purchase_date|date:"Y-m-d H:i" }}</p>
+<p><strong>Total:</strong> ${{ purchase_header.total }}</p>
+<p><strong>Discount:</strong> ${{ purchase_header.discount }}</p>
+
+<h2>Items</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Line Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detail in purchase_details %}
+        <tr>
+            <td>{{ detail.product.name }}</td>
+            <td>{{ detail.description }}</td>
+            <td>{{ detail.qty }}</td>
+            <td>${{ detail.price }}</td>
+            <td>${{ detail.discount }}</td>
+            <td>${{ detail.line_total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'purchase_history' %}">Back to History</a>
+{% endblock %}

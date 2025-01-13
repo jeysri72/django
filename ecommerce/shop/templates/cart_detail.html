@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<h1>Your Cart</h1>
+{% if cart and cart.cartitem_set.all %}
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Line Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart.cartitem_set.all %}
+        <tr>
+            <td>{{ item.product.description }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.qty }}</td>
+            <td>{{ item.line_total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p><strong>Total:</strong> {{ cart.total }}</p>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}
