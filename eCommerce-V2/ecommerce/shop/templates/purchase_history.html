@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Purchase History</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Purchase Date</th>
+            <th>Total</th>
+            <th>Discount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for header in purchase_headers %}
+        <tr>
+            <td>{{ header.purchase_date|date:"Y-m-d H:i" }}</td>
+            <td>${{ header.total }}</td>
+            <td>${{ header.discount }}</td>
+            <td>
+                <a href="{% url 'purchase_details' header.id %}">View Details</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

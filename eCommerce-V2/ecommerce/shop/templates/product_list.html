@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+<h1>Product List</h1>
+
+<!-- Search Form -->
+<form method="get" action="{% url 'product_list' %}" style="margin-bottom: 20px;">
+    <input type="text" name="query" placeholder="Search products..." value="{{ request.GET.query|default:'' }}">
+    <button type="submit">Search</button>
+</form>
+
+<a href="{% url 'create_product' %}">Add New Product</a>
+
+<!-- Product Table -->
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.code }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.qty }}</td>
+            <td>
+                <a href="{% url 'update_product' product.id %}">Edit</a> |
+                <a href="{% url 'delete_product' product.id %}">Delete</a> |
+                <button 
+                    type="button" 
+                    onclick="addToCart('{{ product.id }}')" 
+                    style="cursor: pointer;">Add to Cart
+                </button> |
+                <a href="{% url 'submit_feedback' product.id %}" style="cursor: pointer;">Provide Feedback</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align: center;">No products found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    function addToCart(productId) {
+        fetch("{% url 'add_to_cart' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}",
+            },
+            body: JSON.stringify({ product_id: productId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Product added to cart!');
+            } else if (data.error) {
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error adding to cart:', error);
+            alert('An error occurred. Please try again.');
+        });
+    }
+</script>
+{% endblock %}

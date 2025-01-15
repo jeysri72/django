@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<h1>Your Cart</h1>
+{% if cart and cart.items %}
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Line Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.product.description }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.qty }}</td>
+            <td>{{ item.line_total }}</td>
+            <td>
+                <a href="{% url 'edit_cart_item' item.id %}">Edit</a> |
+                <a href="{% url 'delete_cart_item' item.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p><strong>Total:</strong> {{ cart.total }}</p>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

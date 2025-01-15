@@ -1,0 +1,14 @@
+<h2>Feedback for {{ product.name }}</h2>
+{% if feedback_list %}
+    <ul>
+        {% for feedback in feedback_list %}
+            <li>
+                <strong>{{ feedback.customer.user.get_full_name }}:</strong> 
+                {{ feedback.comments }} 
+                <small>({{ feedback.created_at|date:"F j, Y, g:i a" }})</small>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No feedback available for this product.</p>
+{% endif %}
