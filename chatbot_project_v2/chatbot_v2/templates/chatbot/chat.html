@@ -1,0 +1,24 @@
+<h2>Chatbot</h2>
+{% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send</button>
+    </form>
+
+    <h3>Chat History</h3>
+    <ul>
+        {% for chat in chat_history %}
+            <li><strong>You:</strong> {{ chat.user_message }} <br><strong>Bot:</strong> {{ chat.bot_response | safe }}</li>
+        {% endfor %}
+    </ul>
+
+    {% if user_message %}
+        <div>
+            <p><strong>You:</strong> {{ user_message }}</p>
+            <p><strong>Bot:</strong> {{ bot_response | safe}}</p>
+        </div>
+    {% endif %}
+{% else %}
+    <p>You need to <a href="{% url 'login' %}">login</a> to chat with the bot.</p>
+{% endif %}
